@@ -17,12 +17,12 @@ const Nofication = (props: TNotification) => {
         setSuccessFalse()
       }, 3000)
     }
-  }, [success])
+  }, [success, setSuccessFalse])
 
   return (
     <>
       {success && (
-        <div className='fixed flex items-center justify-center inset-x-0'>
+        <div className='fixed flex items-center justify-center inset-0'>
           <div className='bg-green-50 p-2 rounded shadow-lg'>
             <p className='text-green-500 font-bold flex items-center'>
               <FaCheckCircle />

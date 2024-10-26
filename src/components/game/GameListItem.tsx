@@ -1,5 +1,5 @@
 import { TGame } from '../../types/TGame'
-import { FaStar } from 'react-icons/fa'
+import { FaStar, FaRegStar } from 'react-icons/fa'
 import { useFavoriteStore } from '../../stores/favoriteStore'
 
 type TGameListItem = {
@@ -27,14 +27,27 @@ const GameListItem = (props: TGameListItem) => {
   return (
     <div className='h-24 rounded-lg relative'>
       <img
+        loading='lazy'
+        alt={game.name}
         src={game.imageUrl}
         className='h-24 w-full rounded-lg object-cover'
       />
       <div className='absolute inset-y-1 p-2 top-0 right-0 z-10'>
         <button onClick={() => handleFavorite(game.id)} disabled={isLoading}>
-          <FaStar
-            className={`${isFavorite(game.id) ? 'text-yellow-400' : 'text-gray-400'}`}
-          />
+          {/* <FaStar
+            className={`shadow
+              ${
+                isFavorite(game.id)
+                  ? 'text-yellow-400 hover:text-yellow-500'
+                  : 'text-gray-400 hover:text-gray-500'
+              }`}
+          /> */}
+          {isFavorite(game.id) && (
+            <FaStar className='shadow text-yellow-400 hover:text-yellow-500' />
+          )}
+          {!isFavorite(game.id) && (
+            <FaRegStar className='shadow text-gray-100 hover:text-gray-200' />
+          )}
         </button>
       </div>
       <div className='absolute inset-0 flex items-end w-full'>

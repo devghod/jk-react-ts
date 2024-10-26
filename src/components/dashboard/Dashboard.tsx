@@ -4,11 +4,15 @@ import { IoWalletSharp } from 'react-icons/io5'
 import { HiMenuAlt2 } from 'react-icons/hi'
 import { currencyFormat } from '../../utils/currencyHelper'
 import DashboardMenu from './DashboardMenu'
+import { useFavoriteStore } from '../../stores/favoriteStore'
+import Loader from '../Loader'
 
 const Dashboard = () => {
+  const { isLoading: favoriteLoading } = useFavoriteStore()
+
   return (
     <div className='relative'>
-      <div className='fixed bottom-top left-0 right-0 shadow bg-white'>
+      <div className='fixed bottom-top left-0 right-0 shadow bg-white z-10'>
         <div className='w-full grid grid-cols-11 py-2'>
           <div className='col-span-1 justify-self-center content-center text-sky-500'>
             <button className='active:text-sky-700 mt-1'>
@@ -29,12 +33,13 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className='py-10 bg-gray-100 h-screen'>
+      <div className='py-10 bg-gray-100'>
         <Outlet />
       </div>
       <div className='fixed bottom-0 left-0 right-0 shadow-2xl z-10 bg-white border-t border-gray-100'>
         <DashboardMenu />
       </div>
+      {favoriteLoading && <Loader />}
     </div>
   )
 }

@@ -10,11 +10,11 @@ const DashboardMenu = () => {
   }
 
   return (
-    <div className='w-full grid grid-cols-5 text-slate-500'>
+    <div className='w-full grid grid-cols-5 text-slate-400'>
       <Link
         to={'/dashboard'}
-        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 p-1
-          ${isActivePath('dashboard') && 'bg-slate-200 text-sky-500 font-semibold'}`}
+        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 px-1 py-2 font-semibold
+          ${isActivePath('dashboard') && 'bg-slate-200 text-sky-500'}`}
       >
         <div className='justify-self-center mb-2'>
           <MdSportsBasketball />
@@ -23,8 +23,8 @@ const DashboardMenu = () => {
       </Link>
       <Link
         to={'favorite'}
-        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 p-1
-          ${isActivePath('favorite') && 'bg-slate-200 text-sky-500 font-semibold'}`}
+        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 px-1 py-2 font-semibold
+          ${isActivePath('favorite') && 'bg-slate-200 text-sky-500'}`}
       >
         <div className='justify-self-center mb-2'>
           <FaStar />
@@ -33,8 +33,8 @@ const DashboardMenu = () => {
       </Link>
       <Link
         to={'invite'}
-        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 p-1
-          ${isActivePath('invite') && 'bg-slate-200 text-sky-500 font-semibold'}`}
+        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 px-1 py-2 font-semibold
+          ${isActivePath('invite') && 'bg-slate-200 text-sky-500'}`}
       >
         <div className='justify-self-center mb-2'>
           <IoIosPersonAdd />
@@ -43,8 +43,8 @@ const DashboardMenu = () => {
       </Link>
       <Link
         to={'casino'}
-        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 p-1
-          ${isActivePath('casino') && 'bg-slate-200 text-sky-500 font-semibold'}`}
+        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 px-1 py-2 font-semibold
+          ${isActivePath('casino') && 'bg-slate-200 text-sky-500'}`}
       >
         <div className='justify-self-center mb-2'>
           <FaDice />
@@ -53,8 +53,8 @@ const DashboardMenu = () => {
       </Link>
       <Link
         to={'cashier'}
-        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 p-1
-          ${isActivePath('cashier') && 'bg-slate-200 text-sky-500 font-semibold'}`}
+        className={`uppercase text-center hover:bg-slate-100 hover:text-sky-400 px-1 py-2 font-semibold
+          ${isActivePath('cashier') && 'bg-slate-200 text-sky-500'}`}
       >
         <div className='justify-self-center mb-2'>
           <FaWallet />

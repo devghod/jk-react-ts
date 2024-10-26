@@ -10,6 +10,7 @@ const FavoriteListItem = (props: TFavoriteListItem) => {
   return (
     <div className='h-24 rounded-lg relative'>
       <img
+        loading='lazy'
         src={data.imageUrl}
         className='h-24 w-full rounded-lg object-cover'
       />

@@ -1,7 +1,7 @@
 const Invite = () => {
   return (
-    <div>
-      <h1>Invite</h1>
+    <div className='bg-white'>
+      <div className='text-center text-slate-500 py-5 h-full'>No data</div>
     </div>
   )
 }

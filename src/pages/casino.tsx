@@ -24,7 +24,7 @@ const Casino = () => {
       <AdsCarousel />
       {message && <NotificationBell message={message} />}
       <Filter handleFiltered={handleFilter} handleSearch={handleSearch} />
-      <GameList filtered={filter} search={search} />
+      <GameList filtered={filter} search={search} type={'casino'} />
     </div>
   )
 }

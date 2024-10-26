@@ -1,7 +1,7 @@
 const Cashier = () => {
   return (
-    <div>
-      <h1>Cashier</h1>
+    <div className='bg-white'>
+      <div className='text-center text-slate-500 py-5 h-full'>No data</div>
     </div>
   )
 }

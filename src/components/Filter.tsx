@@ -1,8 +1,15 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { FaSearch, FaFire } from 'react-icons/fa'
-import { NewIcon, JackpotIcon, LiveIcon, SlotsIcon } from '../utils/iconHelper'
+import {
+  NewIcon,
+  JackpotIcon,
+  LiveIcon,
+  SlotsIcon,
+  CloseIcon,
+} from '../utils/iconHelper'
 import { RiMenuSearchLine } from 'react-icons/ri'
 import { LiaSearchSolid } from 'react-icons/lia'
+import { useProviderStore } from '../stores/providerStore'
 
 type TFilter = {
   handleFiltered: (data: string) => void
@@ -10,8 +17,14 @@ type TFilter = {
 }
 
 const Filter = (props: TFilter) => {
+  const {
+    getProviders,
+    providers,
+    isLoading: providerLoading,
+  } = useProviderStore()
   const { handleFiltered, handleSearch } = props
   const [filter, setFilter] = useState<string | ''>('')
+  const [showProviders, setShowProviders] = useState<boolean>(false)
 
   const isFilteredBy = (value: string) => filter === value
   const handleFilter = (value: string) => {
@@ -23,6 +36,19 @@ const Filter = (props: TFilter) => {
     const value = e.target.value
     handleSearch(value)
   }
+
+  const handleGetProviders = () => {
+    setShowProviders(true)
+    getProviders()
+  }
+
+  const filterByProvider = (provider: string) => {
+    setShowProviders(false)
+    handleFiltered('provider')
+    handleSearch(provider)
+  }
+
+  const filteredProviders = useMemo(() => providers, [providers])
 
   return (
     <div className='mx-4'>
@@ -100,9 +126,69 @@ const Filter = (props: TFilter) => {
               placeholder='Search here'
             />
           </div>
-          <button className='border p-2 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500'>
+          <button
+            onClick={handleGetProviders}
+            className='border p-2 rounded-lg border-gray-300 focus:outline-none focus:ring-2 focus:ring-sky-500'
+          >
             <RiMenuSearchLine />
           </button>
+        </div>
+      )}
+      {showProviders && (
+        <div className='relative z-20 transition ease-in-out duration-300'>
+          <div className='fixed inset-0 bg-black bg-opacity-50'>
+            <div className='fixed bottom-0 left-0 right-0'>
+              <div className='bg-white w-full h-72'>
+                <div className='flex bg-sky-500 justify-between p-2 border-b'>
+                  <div className='text-slate-100 text-sm content-center'>
+                    Filter by Providers
+                  </div>
+                  <button
+                    onClick={() => setShowProviders(false)}
+                    className='border p-1 rounded-lg text-red-300 border-red-300'
+                  >
+                    <CloseIcon />
+                  </button>
+                </div>
+                <div className=''>
+                  {providerLoading && (
+                    <div className='grid grid-cols-2 gap-2 animate-pulse mt-2 mx-2'>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                      <div className='h-10 bg-gray-300 rounded-lg'></div>
+                    </div>
+                  )}
+                  {!providerLoading && filteredProviders.length === 0 && (
+                    <div className='text-center text-slate-500 my-2 py-2 h-full'>
+                      No data
+                    </div>
+                  )}
+                  {!providerLoading && (
+                    <div className='grid grid-cols-2 gap-4 mt-3 mx-4 h-52 overflow-auto'>
+                      {filteredProviders.map((provider, index) => (
+                        <button
+                          onClick={() => filterByProvider(provider.name)}
+                          key={index}
+                          className='bg-gray-100 h-10 rounded-lg text-slate-500 hover:bg-gray-200 hover:text-slate-600'
+                        >
+                          {provider.name}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

@@ -7,21 +7,28 @@ import Nofication from '../Notification'
 type TGameList = {
   filtered: string
   search: string
+  type: string
 }
 
 const GameList = (props: TGameList) => {
-  const { filtered, search } = props
+  const { filtered, search, type } = props
   const { games, getGames, isLoading } = useGameStore()
   const { success } = useFavoriteStore()
 
   useEffect(() => {
-    getGames()
-  }, [getGames])
+    getGames(type)
+  }, [getGames, type])
 
   const filteredGames = useMemo(() => {
     let res
     if (filtered === 'search') {
-      res = games.filter(game => game.name.toLowerCase().includes(search))
+      res = games.filter(game =>
+        game.name.toLowerCase().includes(search.toLowerCase()),
+      )
+    } else if (filtered === 'provider') {
+      res = games.filter(game =>
+        game.provider.toLowerCase().includes(search.toLowerCase()),
+      )
     } else {
       res = games.filter(game => game.category.toLowerCase().includes(filtered))
     }
@@ -29,9 +36,12 @@ const GameList = (props: TGameList) => {
   }, [games, filtered, search])
 
   return (
-    <div className='pb-4'>
+    <div className='pb-4 h-96 overflow-auto'>
       {isLoading && (
         <div className='grid grid-cols-3 gap-4 animate-pulse mt-2 mx-4'>
+          <div className='h-24 bg-gray-300 rounded-lg'></div>
+          <div className='h-24 bg-gray-300 rounded-lg'></div>
+          <div className='h-24 bg-gray-300 rounded-lg'></div>
           <div className='h-24 bg-gray-300 rounded-lg'></div>
           <div className='h-24 bg-gray-300 rounded-lg'></div>
           <div className='h-24 bg-gray-300 rounded-lg'></div>

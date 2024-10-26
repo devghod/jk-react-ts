@@ -1,11 +1,15 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useFavoriteStore } from '../../stores/favoriteStore'
 import { useGameStore } from '../../stores/gameStore'
 import FavoriteListItem from './FavoriteListItem'
 
 const FavoriteList = () => {
   const { favorites } = useFavoriteStore()
-  const { games, isLoading } = useGameStore()
+  const { games, getGames, isLoading } = useGameStore()
+
+  useEffect(() => {
+    getGames('all')
+  }, [getGames])
 
   const filteredGames = useMemo(() => {
     return games.filter(game => favorites.includes(game.id))
@@ -23,7 +27,7 @@ const FavoriteList = () => {
           <div className='h-24 bg-gray-300 rounded-lg'></div>
         </div>
       )}
-      {!isLoading && games.length === 0 && (
+      {!isLoading && filteredGames.length === 0 && (
         <div className='text-center text-slate-500 my-2 py-2 h-full'>
           No data
         </div>
