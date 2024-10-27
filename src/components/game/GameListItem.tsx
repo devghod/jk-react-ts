@@ -1,6 +1,7 @@
 import { TGame } from '../../types/TGame'
 import { FaStar, FaRegStar } from 'react-icons/fa'
 import { useFavoriteStore } from '../../stores/favoriteStore'
+import { memo } from 'react'
 
 type TGameListItem = {
   game: TGame
@@ -59,4 +60,4 @@ const GameListItem = (props: TGameListItem) => {
   )
 }
 
-export default GameListItem
+export default memo(GameListItem)

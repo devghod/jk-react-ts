@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { TGame } from '../../types/TGame'
 
 type TFavoriteListItem = {
@@ -23,4 +24,4 @@ const FavoriteListItem = (props: TFavoriteListItem) => {
   )
 }
 
-export default FavoriteListItem
+export default memo(FavoriteListItem)
